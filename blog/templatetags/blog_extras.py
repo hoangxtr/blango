@@ -39,10 +39,11 @@ def author_details(author, current_user):
     name = f'{author.username}'
   if author.email:
     prefix = format_html('<a href="mailto:{}">', author.email)
-    suffix = '</a>'
+    suffix = format_html('</a>')
   else:
     prefix = ''
     suffix = ''
+  print(f"return is {format_html('{}{}{}', prefix, name, suffix)}")
   return format_html('{}{}{}', prefix, name, suffix)
 
 @register.simple_tag
@@ -51,6 +52,13 @@ def row(cls=''):
 @register.simple_tag
 def endrow():
   return format_html("</div>")
+
+@register.simple_tag
+def col(cls=''):
+  return format_html('<div class="col {}">', cls)
+@register.simple_tag
+def endcol():
+  return format_html('</div>')
 
 @register.simple_tag(takes_context=True)
 def author_details_tag(context):
@@ -75,7 +83,7 @@ def author_details_tag(context):
 
   return format_html("{}{}{}", prefix, name, suffix)
 
-register.inclusion_tag("blog/post-list.html")
+@register.inclusion_tag("blog/post-list.html")
 def recent_posts(post):
   posts = Post.objects.exclude(pk=post.pk)[:5]
   return {'title': 'Recent Posts', 'posts': posts}
