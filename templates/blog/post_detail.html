@@ -3,7 +3,14 @@
 
 {% block content %}
 
-
+{% if post.author.profile %}
+  <div class="row">
+    <div class="col">
+      <h4>About author</h4>
+      <p>{{ post.author.profile.bio }}</p>
+    </div>
+  </div>
+{% endif %}
 
 <h2>{{ post.title }}</h2>
 <div class="row">

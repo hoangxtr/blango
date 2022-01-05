@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'blango_auth',
     'debug_toolbar',
     'crispy_forms',
     'crispy_bootstrap5',
@@ -43,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+AUTH_USER_MODEL = 'blango_auth.User'
 
 INTERNAL_IPS = ['192.168.11.179']
 MIDDLEWARE = [
